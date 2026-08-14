@@ -321,6 +321,4 @@ The application will be available at `http://localhost:5174/`
 | **MovieFilter.jsx** | Filtering & stats              | Props, ternary, && operator |
 | **StarRating.jsx**  | Star rating visualization      | Props, .map(), ternary      |
 
----
 
-Created with ❤️ using React & Vite
