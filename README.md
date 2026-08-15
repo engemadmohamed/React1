@@ -1,324 +1,81 @@
-# 🎬 Movie Reviewer - ReactJS Assignment
+# 🎬 Movie Reviewer Pro (ReactJS Assignment 2)
 
-## Project Overview
-
-This is a complete ReactJS project demonstrating all required concepts: **Reusable Components**, **Props**, **Ternary Operator**, **&& Operator**, and **Mapping using .map()**.
-
-The application is a Movie Review system where users can:
-
-- View a collection of movies
-- Filter movies by watch status (All, Watched, Unwatched)
-- Sort movies by rating or year
-- Toggle watch status
-- Delete movies from the collection
-- View statistics about their movie collection
+A modern, responsive, and luxury dark-themed **Cinema Dashboard Application** built with **React 19**, **Vite**, **Bootstrap 5**, and **Styled Components**.
 
 ---
 
-## 📁 Project Structure
+## ✨ Features
 
-```
-src/
-├── components/
-│   ├── MovieCard.jsx          # Reusable movie card component
-│   ├── MovieCard.css
-│   ├── MovieList.jsx          # List component using .map()
-│   ├── MovieList.css
-│   ├── MovieFilter.jsx        # Filter & stats component
-│   ├── MovieFilter.css
-│   ├── StarRating.jsx         # Reusable star rating component
-│   └── StarRating.css
-├── App.jsx                    # Main application component
-├── App.css                    # Application styles
-├── index.css                  # Global styles
-└── main.jsx                   # Entry point
-```
+- 🍿 **Movie Library Management**: Add, view, edit, and delete movie reviews seamlessly.
+- 🖼️ **Poster Image Support**: Display high-quality movie artwork with automatic genre backdrop fallbacks.
+- ℹ️ **Movie Details & Edit Modal**: Click on any movie card or the details button to view comprehensive details or edit information in real time.
+- 🔍 **Real-time Search & Filtering**: Instant title/genre search, status filtering (All, Watched, Watchlist), and sorting (Highest Rating, Newest Release, Title A-Z).
+- 📊 **Dynamic Analytics Dashboard**: Calculates Total Movies, Watched Count, Watchlist, Top Rated Movie, Favorite Genre, Average Rating, and Watch Progress Bar.
+- 💾 **Persistent Storage**: Custom `useLocalStorage` hook preserves library data across browser reloads.
+- 📱 **100% Fully Responsive**: Built with Bootstrap Grid system for mobile, tablet, and desktop viewports.
 
 ---
 
-## 🚀 React Concepts Implemented
+## 🛠️ Technology Stack
 
-### 1. **Reusable Components**
-
-The project is divided into multiple reusable components:
-
-#### **MovieCard Component** (`src/components/MovieCard.jsx`)
-
-- A standalone component that displays individual movie information
-- Accepts props and renders a complete card with movie details
-- Can be used anywhere in the app to display movie information
-
-#### **MovieList Component** (`src/components/MovieList.jsx`)
-
-- Renders a collection of MovieCard components
-- Displays movies in a responsive grid layout
-
-#### **MovieFilter Component** (`src/components/MovieFilter.jsx`)
-
-- Provides filtering and sorting controls
-- Shows collection statistics
-
-#### **StarRating Component** (`src/components/StarRating.jsx`)
-
-- Displays a 5-star rating visualization
-- Reusable across the application
+- **Core**: React 19 (JSX) & Vite
+- **UI & Layout**: Bootstrap 5 (Grid, Forms, Modals) & Glassmorphism Vanilla CSS
+- **Styling**:
+  - Inline Styling (`style={{ ... }}`)
+  - CSS Stylesheets (`App.css`, `index.css`, `MovieCard.css`)
+  - CSS Modules (`MovieFilter.module.css`)
+  - Styled Components (`styled-components`)
+- **State & Logic**: Custom React Hooks (`useLocalStorage`, `useMovieForm`, `useFilterState`, `useSortState`, `useSearchState`, `useFormVisibility`)
 
 ---
 
-### 2. **Props**
+## 📋 Assignment Requirements Checklist
 
-Props are used extensively throughout the application to pass data between components:
-
-#### **MovieCard Component**:
-
-```javascript
-function MovieCard({ movie, onToggleWatched, onDeleteMovie }) {
-  // Props: movie (object), onToggleWatched (function), onDeleteMovie (function)
-  // Used to display movie data and handle user actions
-}
-```
-
-#### **MovieList Component**:
-
-```javascript
-function MovieList({ movies, onToggleWatched, onDeleteMovie }) {
-  // Props: movies (array), callbacks for user actions
-  // Passes props to MovieCard components
-}
-```
-
-#### **MovieFilter Component**:
-
-```javascript
-function MovieFilter({
-  filter,
-  setFilter,
-  sortBy,
-  setSortBy,
-  totalMovies,
-  watchedCount,
-}) {
-  // Props: state values and setter functions
-  // Props: statistics to display
-}
-```
-
-#### **StarRating Component**:
-
-```javascript
-function StarRating({ rating }) {
-  // Props: rating (number)
-}
-```
+### ReactJS Assignment 2 Checklist:
+- [x] **React Hooks**: Used `useState`, `useEffect`, and `useMemo`.
+- [x] **Multiple Hooks**: Used `useState` for state management and `useEffect` for browser synchronization.
+- [x] **Custom Hooks**: Implemented `useLocalStorage` and state debugging hooks in `src/hooks/`.
+- [x] **4 Styling Approaches**:
+  - [x] **Inline Styling**: Dynamic rating badges, progress bar width, star colors.
+  - [x] **CSS Stylesheets**: `App.css`, `index.css`, `MovieCard.css`, `MovieList.css`.
+  - [x] **CSS Modules**: `MovieFilter.module.css`.
+  - [x] **Styled Components**: `StyledComponents.js` (`HeroBanner`, `StyledActionButton`, `StyledGenreChip`).
+- [x] **Bootstrap Integration**: Installed `bootstrap` and imported CSS in `main.jsx`.
+- [x] **Bootstrap Grid & Components**: Utilized `container`, `row g-4`, `col-12 col-md-6 col-lg-4`, and form controls.
+- [x] **Code Architecture**: Properly structured in `src/components/`, `src/hooks/`, and `src/assets/`.
+- [x] **Clean UI & Performance**: 100% functional, zero lint errors, verified build.
 
 ---
 
-### 3. **Ternary Operator**
+## 🚀 Getting Started
 
-The ternary operator is used for conditional rendering throughout the application:
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- `npm` package manager
 
-#### **In MovieCard Component - Rating Color**:
+### Installation & Setup
 
-```javascript
-const getRatingColor = (rating) => {
-  return rating >= 9
-    ? "excellent"
-    : rating >= 8
-      ? "great"
-      : rating >= 7
-        ? "good"
-        : "average";
-};
-```
+1. **Clone or Open Project Directory**:
+   ```bash
+   cd React1
+   ```
 
-#### **For Button Text**:
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-```javascript
-{
-  movie.watched ? "🔄 Mark Unwatched" : "✓ Mark Watched";
-}
-```
+3. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
 
-#### **For Status Display**:
-
-```javascript
-<p className={movie.watched ? "status-watched" : "status-unwatched"}>
-  Status: {movie.watched ? "📺 Already Watched" : "🎬 Not Yet Watched"}
-</p>
-```
+4. **Build Production Bundle**:
+   ```bash
+   npm run build
+   ```
 
 ---
 
-### 4. **&& Operator**
-
-The && operator is used for conditional rendering without else clauses:
-
-#### **In MovieCard Component - Watched Badge**:
-
-```javascript
-{
-  movie.watched && <div className="watched-badge">✓ Watched</div>;
-}
-```
-
-_Only displays the "Watched" badge if the movie has been watched_
-
-#### **In MovieList Component - List Check**:
-
-```javascript
-{movies && movies.length > 0 ? (...) : (...)}
-```
-
-#### **In MovieFilter Component - Filter Info**:
-
-```javascript
-{
-  totalMovies > 0 && (
-    <span className="filter-info">
-      {filter === "All" && `Total: ${totalMovies}`}
-    </span>
-  );
-}
-```
-
----
-
-### 5. **Mapping using .map()**
-
-The .map() method is used to dynamically render lists of components:
-
-#### **In MovieList Component - Render Movie Cards**:
-
-```javascript
-{
-  movies.map((movie) => (
-    <MovieCard
-      key={movie.id}
-      movie={movie}
-      onToggleWatched={onToggleWatched}
-      onDeleteMovie={onDeleteMovie}
-    />
-  ));
-}
-```
-
-_Dynamically renders a MovieCard for each movie in the array_
-
-#### **In StarRating Component - Render Stars**:
-
-```javascript
-{
-  [...Array(5)].map((_, index) => (
-    <span
-      key={index}
-      className={
-        index < fullStars
-          ? "star full"
-          : index === fullStars && hasHalfStar
-            ? "star half"
-            : "star empty"
-      }
-    >
-      ★
-    </span>
-  ));
-}
-```
-
-_Dynamically renders 5 stars based on the rating value_
-
----
-
-## 🎨 User Interface
-
-The application features:
-
-- **Header**: Title and tagline with gradient background
-- **Filter Section**: Controls for filtering and sorting with real-time statistics
-- **Movie Grid**: Responsive grid layout of movie cards
-- **Movie Cards**: Display movie info, ratings, watch status, and action buttons
-- **Star Rating**: Visual 5-star rating display
-- **Statistics Cards**: Show total movies, watched count, unwatched count, and completion percentage
-- **Dark Theme**: Modern dark mode with purple gradient accents
-
-### Responsive Design
-
-- Desktop: Multi-column grid
-- Tablet: Adjusted grid layout
-- Mobile: Single column layout
-
----
-
-## 🛠 Installation & Running
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-The application will be available at `http://localhost:5174/`
-
----
-
-## 📊 Data Structure
-
-**Movie Object:**
-
-```javascript
-{
-  id: 1,
-  title: 'The Shawshank Redemption',
-  rating: 9.3,
-  genre: 'Drama',
-  year: 1994,
-  watched: true
-}
-```
-
----
-
-## 🎯 Key Features
-
-✅ **Filter by Status**: View all, watched, or unwatched movies
-✅ **Sort Options**: By rating or release year
-✅ **Watch Toggle**: Mark movies as watched/unwatched
-✅ **Delete Function**: Remove movies from collection
-✅ **Live Statistics**: Real-time stats of collection
-✅ **Responsive Design**: Works on all device sizes
-✅ **Beautiful UI**: Modern dark theme with gradient accents
-
----
-
-## ✅ All Requirements Met
-
-- ✅ Complete ReactJS project with chosen topic (Movie Review)
-- ✅ Divided into separate and reusable components
-- ✅ Props used extensively for data passing
-- ✅ Ternary operators for conditional rendering
-- ✅ && operators for conditional element display
-- ✅ .map() used to dynamically render lists
-- ✅ Proper file and component organization
-- ✅ Simple and clean UI with modern design
-
----
-
-## 📝 Component Summary
-
-| Component           | Purpose                        | Demonstrates                |
-| ------------------- | ------------------------------ | --------------------------- |
-| **App.jsx**         | Main application state & logic | Props, useState, filtering  |
-| **MovieList.jsx**   | Render movie collection        | .map(), && operator         |
-| **MovieCard.jsx**   | Individual movie display       | Props, ternary, && operator |
-| **MovieFilter.jsx** | Filtering & stats              | Props, ternary, && operator |
-| **StarRating.jsx**  | Star rating visualization      | Props, .map(), ternary      |
-
-
+## 📄 License
+This project is created for **ReactJS Assignment 2** submission. All rights reserved.
