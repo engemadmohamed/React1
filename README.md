@@ -1,4 +1,3 @@
-# 🎬 Movie Reviewer Pro (ReactJS Assignment 2)
 
 A modern, responsive, and luxury dark-themed **Cinema Dashboard Application** built with **React 19**, **Vite**, **Bootstrap 5**, and **Styled Components**.
 
@@ -75,7 +74,3 @@ A modern, responsive, and luxury dark-themed **Cinema Dashboard Application** bu
    npm run build
    ```
 
----
-
-## 📄 License
-This project is created for **ReactJS Assignment 2** submission. All rights reserved.
