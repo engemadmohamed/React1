@@ -1,58 +1,100 @@
-# 🎬 Movie Reviewer Pro (ReactJS Assignment 1, 2 & 3)
+# CinemaDB - ReactJS State Management & Routing Application
 
-A multi-page Cinema Dashboard Application built with **React 19**, **React Router DOM 7**, **Vite**, **Bootstrap 5**, and **Styled Components**.
-
----
-
-## ✨ Features & Pages
-
-- 🏠 **Home Page (`/`)**: Movie library management (CRUD), search, status filters, sorting, movie details/editing modal, and real-time cinema metrics.
-- ℹ️ **About Page (`/about`)**: Application overview, technical architecture, assignment requirements compliance, and technology stack.
-- 📩 **Contact & Register Page (`/contact`)**: Form with 5 validated fields (Full Name, Email, Phone, Subject, Message), controlled inputs, inline error validation, and success notification banner.
-- 🚫 **404 Not Found Page (`*`)**: Custom error page with quick redirect back to Home.
-- 🧭 **Navigation Bar**: Responsive glassmorphic navbar with active route highlighting.
+A comprehensive, production-ready React 19 application fulfilling all requirements across **ReactJS Assignments 1, 2, 3, and 4**.
 
 ---
 
-## 🛠️ Technology Stack
+## 🎯 Architecture & Assignment Compliance
 
-- **Core**: React 19 & Vite
-- **Routing**: React Router DOM (`BrowserRouter`, `Routes`, `Route`, `NavLink`)
-- **UI & Layout**: Bootstrap 5 (Grid, Forms, Modals, Navbar) & Glassmorphism CSS
-- **Styling**:
-  - Inline Styling (`style={{ ... }}`)
-  - CSS Stylesheets (`App.css`, `index.css`, `MovieCard.css`)
-  - CSS Modules (`MovieFilter.module.css`)
-  - Styled Components (`styled-components`)
-- **State & Logic**: Custom React Hooks (`useLocalStorage`, `useMovieForm`, `useFilterState`, `useSortState`, `useSearchState`, `useFormVisibility`)
+### 1. Component Architecture (Assignment 1)
+- **Reusable Components**: `MovieList`, `MovieCard`, `MovieFilter`, `StarRating`, `MovieModal`, `CartModal`, `Navbar`.
+- **Props Passing**: Seamless unidirectional data flow from containers to child components.
+- **Conditional Rendering**: Utilizes Ternary operators (`? :`) and short-circuit evaluation (`&&`).
+- **Array Rendering**: Dynamic `.map()` rendering for movies, star ratings, genres, and watchlist items.
+
+### 2. React Hooks & 4 Styling Approaches (Assignment 2)
+- **React Hooks**: `useState`, `useEffect`, `useMemo`, `useContext`, `useDebugValue`.
+- **Custom Hooks**: `useLocalStorage` (with defensive JSON parsing & corruption guards), `useMovieAppHooks` (`useMovieForm`, `useFilterState`, `useSortState`, `useSearchState`, `useFormVisibility`).
+- **Four React Styling Approaches**:
+  1. **Inline Styling**: Direct React styles (`style={{ ... }}`).
+  2. **CSS Stylesheets**: Standard stylesheets (`index.css`, `App.css`, `MovieCard.css`, `MovieList.css`, `StarRating.css`).
+  3. **CSS Modules**: Scoped module classes (`MovieFilter.module.css`).
+  4. **Styled Components**: Dynamic CSS-in-JS components (`StyledComponents.js`).
+- **Bootstrap 5**: Responsive layout grids, forms, modals, and helper utilities.
+
+### 3. Multi-Page SPA & Form Handling (Assignment 3)
+- **React Router DOM 7**: `BrowserRouter`, `Routes`, `Route`, `NavLink`, `Link`.
+- **Routes Configured**:
+  - `/` -> Library / Home Page
+  - `/about` -> Application & Architecture Documentation
+  - `/contact` -> Controlled Contact / Registration Form with 5 validated fields
+  - `*` -> Custom 404 Page Not Found Route
+- **Form Handling**: Controlled form state, real-time validation for Name, Email, Phone, and Message, inline error feedback, and success alert banner.
+
+### 4. Context API & Redux Toolkit (Assignment 4)
+- **Context API (`src/context/`)**:
+  - `ThemeContextObject.js`: React Context definition.
+  - `ThemeContext.jsx`: `ThemeProvider` managing application theme (`dark` / `light`).
+  - `useTheme.js`: Custom hook consuming `ThemeContext`.
+- **Redux Toolkit (`src/redux/`)**:
+  - `slices/cartSlice.js`: Manages global watchlist cart state (`items`, `isOpen`) with reducers (`addToCart`, `removeFromCart`, `clearCart`, `toggleCartModal`).
+  - `store.js`: Configured Redux store with `configureStore`.
+  - `useSelector` & `useDispatch`: Applied in `Navbar.jsx`, `MovieCard.jsx`, and `CartModal.jsx`.
 
 ---
 
-## 📋 Assignment Requirements Checklist
+## 📁 Directory Structure
 
-### ReactJS Assignment 3 Checklist:
-- [x] **Multiple Pages**: Created SPA with multiple routes (`/`, `/about`, `/contact`, `*`).
-- [x] **React Router DOM**: Installed and configured `react-router-dom`.
-- [x] **Navigation Bar**: Interactive Navbar with `NavLink` for page switching.
-- [x] **Contact/Registration Form**: 5 controlled input fields (Name, Email, Phone, Subject, Message).
-- [x] **Form State & Validation**: Managed inputs with React state, added email & phone regex validation.
-- [x] **Success Alert**: Displays confirmation box upon valid form submission without page refresh.
-- [x] **404 Route**: Handles unknown URLs with a custom Not Found page.
-- [x] **Organization**: Clear separation into `src/pages/` and `src/components/`.
+```text
+src/
+├── assets/
+├── components/
+│   ├── CartModal.jsx
+│   ├── MovieCard.css
+│   ├── MovieCard.jsx
+│   ├── MovieFilter.css
+│   ├── MovieFilter.jsx
+│   ├── MovieFilter.module.css
+│   ├── MovieList.css
+│   ├── MovieList.jsx
+│   ├── MovieModal.jsx
+│   ├── Navbar.jsx
+│   ├── StarRating.css
+│   ├── StarRating.jsx
+│   └── StyledComponents.js
+├── context/
+│   ├── ThemeContext.jsx
+│   ├── ThemeContextObject.js
+│   └── useTheme.js
+├── hooks/
+│   ├── useLocalStorage.js
+│   └── useMovieAppHooks.js
+├── pages/
+│   ├── About.jsx
+│   ├── Contact.jsx
+│   ├── Home.jsx
+│   └── NotFound.jsx
+├── redux/
+│   ├── slices/
+│   │   └── cartSlice.js
+│   └── store.js
+├── App.css
+├── App.jsx
+├── index.css
+└── main.jsx
+```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Running the Project
 
 ```bash
 # Install dependencies
 npm install
 
-# Run dev server
+# Start Vite development server
 npm run dev
 
-# Build production bundle
+# Build for production
 npm run build
 ```
-
-

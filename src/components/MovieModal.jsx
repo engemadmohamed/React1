@@ -36,23 +36,33 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
       className="modal fade show d-block"
       tabIndex="-1"
       style={{
-        backgroundColor: "rgba(15, 23, 42, 0.85)",
-        backdropFilter: "blur(12px)",
+        backgroundColor: "rgba(0, 0, 0, 0.6)",
+        backdropFilter: "blur(4px)",
         zIndex: 1055,
       }}
     >
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div
-          className="modal-content bg-dark text-white border-warning border-opacity-40 shadow-lg rounded-4 overflow-hidden"
-          style={{ background: "rgba(30, 41, 59, 0.95)", border: "1px solid rgba(234, 179, 8, 0.3)" }}
+          className="modal-content"
+          style={{
+            backgroundColor: "var(--bg-surface)",
+            border: "1px solid var(--border-color)",
+            borderRadius: "12px",
+            color: "var(--text-primary)",
+          }}
         >
-          <div className="modal-header border-bottom border-secondary border-opacity-25 px-4 py-3 bg-black bg-opacity-40">
-            <h5 className="modal-content-title modal-title text-warning fw-bold d-flex align-items-center gap-2">
-              <span>{isEditing ? "✏️ Edit Movie Details" : "🎬 Movie Details"}</span>
+          <div
+            className="modal-header px-4 py-3"
+            style={{
+              borderBottom: "1px solid var(--border-color)",
+            }}
+          >
+            <h5 className="modal-title fw-bold m-0" style={{ fontSize: "1.1rem" }}>
+              {isEditing ? "Edit Movie Details" : "Movie Details"}
             </h5>
             <button
               type="button"
-              className="btn-close btn-close-white"
+              className="btn-close"
               onClick={onClose}
               aria-label="Close"
             ></button>
@@ -63,23 +73,32 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
               <div className="row g-4">
                 <div className="col-12 col-md-5 text-center">
                   <div
-                    className="position-relative rounded-4 overflow-hidden shadow-lg border border-secondary border-opacity-25"
-                    style={{ minHeight: "260px", backgroundColor: "#0f172a" }}
+                    className="rounded-3 overflow-hidden"
+                    style={{
+                      minHeight: "260px",
+                      backgroundColor: "var(--bg-elevated)",
+                      border: "1px solid var(--border-color)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
                   >
                     {movie.poster ? (
                       <img
                         src={movie.poster}
                         alt={movie.title}
-                        className="w-100 h-100 object-fit-cover position-absolute top-0 start-0"
+                        className="w-100 h-100 object-fit-cover"
+                        style={{ maxHeight: "320px" }}
                         onError={(e) => {
                           e.target.style.display = "none";
                         }}
                       />
-                    ) : null}
-                    <div className="p-4 d-flex flex-column justify-content-center h-100">
-                      <span className="display-1">🎬</span>
-                      <p className="text-secondary small mt-2">{movie.genre} Cinema</p>
-                    </div>
+                    ) : (
+                      <div className="p-4 text-secondary">
+                        <div style={{ fontSize: "3rem" }}>🎬</div>
+                        <div className="small mt-2">{movie.genre}</div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -87,46 +106,48 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
                   <div>
                     <div className="d-flex align-items-center gap-2 mb-2">
                       <StyledGenreChip>{movie.genre}</StyledGenreChip>
-                      <span className="badge bg-secondary bg-opacity-20 text-light border border-secondary border-opacity-30">
-                        🗓️ {movie.year}
-                      </span>
+                      <span className="font-mono small text-secondary">{movie.year}</span>
                     </div>
 
-                    <h2 className="h3 text-white fw-bold mb-3">{movie.title}</h2>
+                    <h2 className="h4 fw-bold mb-2" style={{ color: "var(--text-primary)" }}>
+                      {movie.title}
+                    </h2>
 
                     <div className="mb-3">
                       <StarRating rating={movie.rating} />
                     </div>
 
-                    <p className="text-secondary small mb-4">
-                      Rating Score: <strong className="text-warning">{movie.rating.toFixed(1)} / 10</strong>
+                    <p className="small text-secondary mb-3">
+                      Rating Score: <strong className="font-mono" style={{ color: "var(--accent-primary)" }}>{movie.rating.toFixed(1)} / 10</strong>
                     </p>
 
                     <div className="mb-3">
-                      <span className="text-secondary small d-block mb-1">Watch Status:</span>
-                      {movie.watched ? (
-                        <span
-                          className="badge px-3 py-2 rounded-pill shadow-sm"
-                          style={{ backgroundColor: "#10b981", color: "#ffffff", fontWeight: 700 }}
-                        >
-                          ✓ Watched
-                        </span>
-                      ) : (
-                        <span
-                          className="badge px-3 py-2 rounded-pill shadow-sm"
-                          style={{ backgroundColor: "#f59e0b", color: "#0f172a", fontWeight: 800 }}
-                        >
-                          🎬 Not Yet Watched
-                        </span>
-                      )}
+                      <span className="text-secondary small d-block mb-1">Status:</span>
+                      <span
+                        className="badge"
+                        style={{
+                          backgroundColor: movie.watched ? "rgba(16, 185, 129, 0.15)" : "var(--accent-subtle)",
+                          color: movie.watched ? "var(--success)" : "var(--accent-primary)",
+                          border: `1px solid ${movie.watched ? "rgba(16, 185, 129, 0.3)" : "var(--accent-border)"}`,
+                          padding: "0.4rem 0.75rem",
+                          borderRadius: "6px",
+                          fontSize: "0.8rem",
+                        }}
+                      >
+                        {movie.watched ? "Watched" : "Not Watched"}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="pt-3 border-top border-secondary border-opacity-25 d-flex gap-2">
+                  <div className="pt-3 border-top d-flex gap-2" style={{ borderColor: "var(--border-color)" }}>
                     <StyledActionButton $variant="primary" onClick={() => setIsEditing(true)}>
-                      ✏️ Edit Movie
+                      Edit Movie
                     </StyledActionButton>
-                    <button type="button" className="btn btn-outline-secondary rounded-3" onClick={onClose}>
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={onClose}
+                    >
                       Close
                     </button>
                   </div>
@@ -140,7 +161,12 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
                     <input
                       type="text"
                       name="title"
-                      className="form-control bg-secondary bg-opacity-10 text-white border-secondary"
+                      className="form-control"
+                      style={{
+                        backgroundColor: "var(--bg-card)",
+                        borderColor: "var(--border-color)",
+                        color: "var(--text-primary)",
+                      }}
                       value={formData.title || ""}
                       onChange={handleChange}
                       required
@@ -151,18 +177,23 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
                     <label className="form-label text-secondary small fw-bold">Genre</label>
                     <select
                       name="genre"
-                      className="form-select bg-secondary bg-opacity-10 text-white border-secondary"
+                      className="form-select"
+                      style={{
+                        backgroundColor: "var(--bg-card)",
+                        borderColor: "var(--border-color)",
+                        color: "var(--text-primary)",
+                      }}
                       value={formData.genre || "Drama"}
                       onChange={handleChange}
                     >
-                      <option value="Action" className="bg-dark">Action</option>
-                      <option value="Drama" className="bg-dark">Drama</option>
-                      <option value="Comedy" className="bg-dark">Comedy</option>
-                      <option value="Crime" className="bg-dark">Crime</option>
-                      <option value="Sci-Fi" className="bg-dark">Sci-Fi</option>
-                      <option value="Adventure" className="bg-dark">Adventure</option>
-                      <option value="Thriller" className="bg-dark">Thriller</option>
-                      <option value="Animation" className="bg-dark">Animation</option>
+                      <option value="Action">Action</option>
+                      <option value="Drama">Drama</option>
+                      <option value="Comedy">Comedy</option>
+                      <option value="Crime">Crime</option>
+                      <option value="Sci-Fi">Sci-Fi</option>
+                      <option value="Adventure">Adventure</option>
+                      <option value="Thriller">Thriller</option>
+                      <option value="Animation">Animation</option>
                     </select>
                   </div>
 
@@ -171,7 +202,12 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
                     <input
                       type="number"
                       name="year"
-                      className="form-control bg-secondary bg-opacity-10 text-white border-secondary"
+                      className="form-control font-mono"
+                      style={{
+                        backgroundColor: "var(--bg-card)",
+                        borderColor: "var(--border-color)",
+                        color: "var(--text-primary)",
+                      }}
                       value={formData.year || ""}
                       onChange={handleChange}
                     />
@@ -185,7 +221,12 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
                       min="0"
                       max="10"
                       step="0.1"
-                      className="form-control bg-secondary bg-opacity-10 text-white border-secondary"
+                      className="form-control font-mono"
+                      style={{
+                        backgroundColor: "var(--bg-card)",
+                        borderColor: "var(--border-color)",
+                        color: "var(--text-primary)",
+                      }}
                       value={formData.rating || ""}
                       onChange={handleChange}
                     />
@@ -196,8 +237,13 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
                     <input
                       type="url"
                       name="poster"
-                      placeholder="https://example.com/poster.jpg"
-                      className="form-control bg-secondary bg-opacity-10 text-white border-secondary"
+                      placeholder="https://images.unsplash.com/..."
+                      className="form-control"
+                      style={{
+                        backgroundColor: "var(--bg-card)",
+                        borderColor: "var(--border-color)",
+                        color: "var(--text-primary)",
+                      }}
                       value={formData.poster || ""}
                       onChange={handleChange}
                     />
@@ -209,27 +255,27 @@ function MovieModal({ movie, isOpen, onClose, onSaveEdit }) {
                         type="checkbox"
                         id="modal-watched"
                         name="watched"
-                        className="form-check-input bg-secondary bg-opacity-25 border-warning"
+                        className="form-check-input"
                         checked={formData.watched || false}
                         onChange={handleChange}
                       />
-                      <label htmlFor="modal-watched" className="form-check-label text-white ms-2">
-                        Mark as watched
+                      <label htmlFor="modal-watched" className="form-check-label text-secondary small">
+                        Already watched this movie
                       </label>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-top border-secondary border-opacity-25 text-end d-flex justify-content-end gap-2">
+                <div className="mt-4 pt-3 border-top d-flex justify-content-end gap-2" style={{ borderColor: "var(--border-color)" }}>
                   <button
                     type="button"
-                    className="btn btn-outline-secondary rounded-3"
+                    className="btn btn-sm btn-outline-secondary"
                     onClick={() => setIsEditing(false)}
                   >
                     Cancel
                   </button>
                   <StyledActionButton type="submit" $variant="success">
-                    💾 Save Changes
+                    Save Changes
                   </StyledActionButton>
                 </div>
               </form>

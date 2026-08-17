@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import CartModal from "./components/CartModal";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -8,7 +9,7 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div className="app-root min-vh-100 d-flex flex-column">
+    <div className="app-root">
       <Navbar />
 
       <div className="flex-grow-1">
@@ -20,16 +21,12 @@ function App() {
         </Routes>
       </div>
 
-      <footer
-        className="mt-auto text-center text-secondary small py-4"
-        style={{
-          borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-          background: "rgba(15, 23, 42, 0.8)",
-        }}
-      >
+      <CartModal />
+
+      <footer className="site-footer text-center">
         <div className="container">
           <p className="mb-0">
-            © 2026 Movie Reviewer Pro | Built with React 19, React Router DOM & Bootstrap 5
+            CinemaDB Application • React 19, Redux Toolkit, Context API, React Router DOM &amp; Bootstrap 5
           </p>
         </div>
       </footer>

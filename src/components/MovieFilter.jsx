@@ -23,12 +23,12 @@ function MovieFilter({
   }, [movies]);
 
   const topGenre = useMemo(() => {
-    if (!movies || movies.length === 0) return "N/A";
+    if (!movies || movies.length === 0) return "None";
     const genreCounts = movies.reduce((acc, m) => {
       acc[m.genre] = (acc[m.genre] || 0) + 1;
       return acc;
     }, {});
-    return Object.keys(genreCounts).reduce((a, b) => (genreCounts[a] > genreCounts[b] ? a : b), "N/A");
+    return Object.keys(genreCounts).reduce((a, b) => (genreCounts[a] > genreCounts[b] ? a : b), "None");
   }, [movies]);
 
   const avgRating = useMemo(() => {
@@ -42,110 +42,90 @@ function MovieFilter({
       <div className={styles.toolbar}>
         <div className={styles.searchBox}>
           <label htmlFor="movie-search" className={styles.filterLabel}>
-            🔍 Search Library
+            Search Library
           </label>
           <input
             id="movie-search"
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search by title or genre..."
+            placeholder="Filter by title or genre..."
             className={styles.searchInput}
           />
         </div>
 
-        <StyledActionButton $variant="primary" onClick={onClearFilters}>
-          🔄 Reset Filters
+        <StyledActionButton $variant="outline" onClick={onClearFilters}>
+          Reset Filters
         </StyledActionButton>
       </div>
 
       <div className={styles.filterRow}>
         <div>
           <label htmlFor="filter-select" className={styles.filterLabel}>
-            Filter Status
+            Viewing Status
           </label>
           <select
             id="filter-select"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className={`${styles.filterSelect} form-select text-white`}
-            style={{ backgroundColor: "rgba(15, 23, 42, 0.9)", borderColor: "rgba(234, 179, 8, 0.4)" }}
+            className={styles.filterSelect}
           >
-            <option value="All" className="bg-dark text-white">All Movies ({totalMovies})</option>
-            <option value="Watched" className="bg-dark text-white">Watched Movies ({watchedCount})</option>
-            <option value="Unwatched" className="bg-dark text-white">Not Yet Watched ({unwatchedCount})</option>
+            <option value="All">All Movies ({totalMovies})</option>
+            <option value="Watched">Watched ({watchedCount})</option>
+            <option value="Unwatched">Unwatched ({unwatchedCount})</option>
           </select>
         </div>
 
         <div>
           <label htmlFor="sort-select" className={styles.filterLabel}>
-            Sort By
+            Sort Library
           </label>
           <select
             id="sort-select"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className={`${styles.filterSelect} form-select text-white`}
-            style={{ backgroundColor: "rgba(15, 23, 42, 0.9)", borderColor: "rgba(234, 179, 8, 0.4)" }}
+            className={styles.filterSelect}
           >
-            <option value="rating" className="bg-dark text-white">Highest Rating ⭐</option>
-            <option value="year" className="bg-dark text-white">Newest Release 📅</option>
-            <option value="title" className="bg-dark text-white">Title A-Z 🔤</option>
+            <option value="rating">Rating (High to Low)</option>
+            <option value="year">Year (Newest First)</option>
+            <option value="title">Title (A-Z)</option>
           </select>
         </div>
       </div>
 
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>🎬</span>
-          <div>
-            <p className={styles.statLabel}>Total</p>
-            <h4 className={styles.statValue}>{totalMovies}</h4>
-          </div>
+          <p className={styles.statLabel}>Total Library</p>
+          <h4 className={styles.statValue}>{totalMovies}</h4>
         </div>
 
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>✅</span>
-          <div>
-            <p className={styles.statLabel}>Watched</p>
-            <h4 className={styles.statValue} style={{ color: "#34d399" }}>{watchedCount}</h4>
-          </div>
+          <p className={styles.statLabel}>Watched</p>
+          <h4 className={styles.statValue} style={{ color: "var(--success)" }}>{watchedCount}</h4>
         </div>
 
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>🏆</span>
-          <div>
-            <p className={styles.statLabel}>Top Movie</p>
-            <h4 className={styles.statValue} style={{ color: "#fef08a", fontSize: "0.95rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "110px" }}>
-              {topRatedMovie ? topRatedMovie.title : "N/A"}
-            </h4>
-          </div>
+          <p className={styles.statLabel}>Top Rated</p>
+          <h4 className={styles.statValue} style={{ fontSize: "0.95rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+            {topRatedMovie ? topRatedMovie.title : "None"}
+          </h4>
         </div>
 
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>🎭</span>
-          <div>
-            <p className={styles.statLabel}>Top Genre</p>
-            <h4 className={styles.statValue} style={{ color: "#fbbf24" }}>{topGenre}</h4>
-          </div>
+          <p className={styles.statLabel}>Top Genre</p>
+          <h4 className={styles.statValue} style={{ fontSize: "1rem" }}>{topGenre}</h4>
         </div>
 
         <div className={styles.statCard}>
-          <span className={styles.statIcon}>⭐</span>
-          <div>
-            <p className={styles.statLabel}>Avg Rating</p>
-            <h4 className={styles.statValue} style={{ color: "#60a5fa" }}>{avgRating}</h4>
-          </div>
+          <p className={styles.statLabel}>Average Rating</p>
+          <h4 className={styles.statValue} style={{ color: "var(--accent-primary)" }}>{avgRating}</h4>
         </div>
       </div>
 
-      <div className={styles.progressBarContainer}>
+      <div className={styles.progressBarContainer} title={`Watch progress: ${completionPercentage}%`}>
         <div
           className={styles.progressBarFill}
-          style={{
-            width: `${completionPercentage}%`,
-            transition: "width 0.5s ease-in-out",
-          }}
+          style={{ width: `${completionPercentage}%` }}
         />
       </div>
     </section>

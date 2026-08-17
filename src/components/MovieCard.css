@@ -1,24 +1,89 @@
-.movie-card-custom {
-  background: rgba(30, 41, 59, 0.65) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 1.25rem !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+.movie-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.18s ease, border-color 0.18s ease;
 }
 
-.movie-card-custom:hover {
-  transform: translateY(-6px);
-  border-color: rgba(234, 179, 8, 0.4) !important;
-  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5), 0 0 25px rgba(234, 179, 8, 0.15);
+.movie-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-hover);
 }
 
-.movie-card-custom.is-watched {
-  border-left: 4px solid #10b981 !important;
+.movie-poster-wrap {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  background-color: var(--bg-elevated);
+  overflow: hidden;
 }
 
-.movie-card-custom:not(.is-watched) {
-  border-left: 4px solid #eab308 !important;
+.movie-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.movie-poster-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--text-muted);
+}
+
+.movie-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.movie-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+}
+
+.movie-card-title:hover {
+  color: var(--accent-primary);
+}
+
+.movie-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.status-watched {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--success);
+}
+
+.status-unwatched {
+  background-color: var(--accent-subtle);
+  color: var(--accent-primary);
 }

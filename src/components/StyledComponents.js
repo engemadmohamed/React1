@@ -1,81 +1,63 @@
 import styled from "styled-components";
 
-export const HeroBanner = styled.header`
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
-  border-bottom: 2px solid rgba(234, 179, 8, 0.4);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  padding: 2.5rem 1.5rem;
-  border-radius: 0 0 1.5rem 1.5rem;
+export const HeroBanner = styled.section`
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 2.5rem 0;
   margin-bottom: 2rem;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(234, 179, 8, 0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
 `;
 
 export const MainTitle = styled.h1`
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-main);
   font-weight: 800;
-  font-size: 2.4rem;
-  background: linear-gradient(90deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.25rem;
-  letter-spacing: -0.5px;
+  font-size: 2rem;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.35rem;
 `;
 
 export const EyebrowText = styled.span`
-  color: #94a3b8;
-  font-size: 0.875rem;
+  color: var(--accent-primary);
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-weight: 700;
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 `;
 
 export const StyledActionButton = styled.button`
   background: ${(props) =>
     props.$variant === "danger"
-      ? "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)"
+      ? "var(--danger)"
       : props.$variant === "success"
-      ? "linear-gradient(135deg, #10b981 0%, #059669 100%)"
-      : "linear-gradient(135deg, #eab308 0%, #ca8a04 100%)"};
-  color: ${(props) => (props.$variant === "primary" || !props.$variant ? "#0f172a" : "#ffffff")};
-  font-weight: 700;
-  border: none;
-  padding: 0.65rem 1.25rem;
-  border-radius: 0.75rem;
+      ? "var(--success)"
+      : props.$variant === "outline"
+      ? "transparent"
+      : "var(--accent-primary)"};
+  color: ${(props) =>
+    props.$variant === "outline"
+      ? "var(--text-primary)"
+      : props.$variant === "primary" || !props.$variant
+      ? "#0f172a"
+      : "#ffffff"};
+  border: ${(props) =>
+    props.$variant === "outline" ? "1px solid var(--border-color)" : "none"};
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.15s ease;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 14px ${(props) =>
-    props.$variant === "danger"
-      ? "rgba(239, 68, 68, 0.3)"
-      : props.$variant === "success"
-      ? "rgba(16, 185, 129, 0.3)"
-      : "rgba(234, 179, 8, 0.3)"};
+  gap: 0.4rem;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px ${(props) =>
-      props.$variant === "danger"
-        ? "rgba(239, 68, 68, 0.4)"
-        : props.$variant === "success"
-        ? "rgba(16, 185, 129, 0.4)"
-        : "rgba(234, 179, 8, 0.4)"};
-    filter: brightness(1.08);
+    opacity: 0.92;
+    transform: translateY(-1px);
+    background: ${(props) =>
+      props.$variant === "outline" ? "var(--bg-elevated)" : ""};
   }
 
   &:active {
@@ -84,12 +66,13 @@ export const StyledActionButton = styled.button`
 `;
 
 export const StyledGenreChip = styled.span`
-  background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(234, 179, 8, 0.3);
-  color: #fef08a;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.25rem 0.75rem;
-  border-radius: 2rem;
-  backdrop-filter: blur(4px);
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent-border);
+  color: var(--accent-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 `;

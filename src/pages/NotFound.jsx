@@ -3,25 +3,28 @@ import { StyledActionButton } from "../components/StyledComponents";
 
 function NotFound() {
   return (
-    <div className="container py-5 text-center">
-      <div className="row justify-content-center py-5">
-        <div className="col-12 col-md-8 col-lg-6">
+    <div className="container py-5 text-center my-auto">
+      <div className="row justify-content-center">
+        <div className="col-12 col-md-6">
           <div
-            className="p-5 rounded-4 shadow-lg"
+            className="p-5 rounded-3"
             style={{
-              background: "rgba(30, 41, 59, 0.7)",
-              backdropFilter: "blur(12px)",
-              border: "1px solid rgba(234, 179, 8, 0.3)",
+              backgroundColor: "var(--bg-surface)",
+              border: "1px solid var(--border-color)",
             }}
           >
-            <div className="display-1 text-warning fw-bold font-monospace mb-2">404</div>
-            <h1 className="h3 text-white fw-bold mb-3">Page Not Found</h1>
-            <p className="text-secondary mb-4">
-              Oops! The cinema page or URL you are looking for does not exist or has been moved.
+            <div className="font-mono display-4 fw-bold mb-2" style={{ color: "var(--accent-primary)" }}>
+              404
+            </div>
+            <h1 className="h4 fw-bold mb-2" style={{ color: "var(--text-primary)" }}>
+              Page Not Found
+            </h1>
+            <p className="text-secondary small mb-4">
+              The page you are looking for does not exist or has been moved.
             </p>
             <Link to="/">
               <StyledActionButton $variant="primary">
-                🏠 Back to Home Page
+                Return to Library
               </StyledActionButton>
             </Link>
           </div>
